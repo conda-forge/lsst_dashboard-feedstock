@@ -10,16 +10,16 @@ source:
   sha256: 3ff072dec778b63518fd62042bc00559e43b940c42fc21037531f5f0b89c3ff8
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
-  build:
-    - python >=3.7
+  host:
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - param
     - panel
     - holoviews
@@ -36,6 +36,8 @@ requirements:
     - pyarrow
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - lsst_dashboard
 
